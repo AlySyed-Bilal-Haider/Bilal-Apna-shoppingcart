@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./assets/productslist.css";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { selectedProduct } from "../redux/Actions/productsActions";
 import { Link } from "react-router-dom";
@@ -10,7 +11,10 @@ import Slider from "./Slider";
 import Footer from "./Footer/Footer";
 import { css } from "@emotion/react";
 import HashLoader from "react-spinners/HashLoader";
+import 'font-awesome/css/font-awesome.min.css';
+import { ToastContainer, toast } from 'react-toastify';
 function Productslisting() {
+  const navigate=useNavigate();
   const Products = useSelector((state) => state.productReducer);
   let [loading, setLoading] = useState(true);
   let [navigatebuytocart,setMovebuytocart]=useState(false);
@@ -19,9 +23,15 @@ function Productslisting() {
   useEffect(() => {
     Productsdata();
   }, []);
+  let axiosConfig = {
+    headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+        "Access-Control-Allow-Origin": "*",
+    }
+  };
   const Productsdata = async () => {
     await axios
-      .get(`https://fakestoreapi.com/products`)
+      .get(`https://fakestoreapi.com/products`,axiosConfig)
       .then(function (response) {
         usedispatch(selectedProduct(response.data));
         setLoading(false);
@@ -30,13 +40,40 @@ function Productslisting() {
         console.log("error", error);
       });
   };
+  // add to cart method
   const addTocart = (productsId) => {
+    if ("userlogindetails" in localStorage)
+    {
     setAddtocart(productsId);
+    return true;
+    }
+    else
+    {
+      setTimeout(()=>{
+        navigate('/userlogin');
+      },2000);
+      toast.error(' please craete account or login', {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
+      
+    }
   };
+  // parents to child values method;
   const addtocartEmpty = (cartEmptyvalue) => {
     setAddtocart(cartEmptyvalue);
     setMovebuytocart(false);
   };
+  //buy now products methods
+  const Buynowrproducts=(id)=>{
+    addTocart(id);
+    setMovebuytocart(true);
+  }
   const override = css`
   display: block;
   margin: auto;
@@ -47,11 +84,12 @@ function Productslisting() {
 `;
 const sweetloading={
   width:'100%',
-  minHeight:'1220px',
-  backgroundColor:'#4848488f',
+  minHeight:'100vh',
+  backgroundColor:'rgba(#4848488,0,0,0.10)',
   position: 'absolute',
   zIndex: 9999,
-  marginTop:'-55px'
+  marginTop:'-55px',
+  position:'fixed',
 }
   return (
     <>
@@ -99,10 +137,7 @@ const sweetloading={
                     </div>
                     <div className="add_to_cart">
                       <button className="btn btn-primary" 
-                       onClick={() => {
-                        addTocart(id);
-                        setMovebuytocart(true);
-                      }}
+                       onClick={()=>{Buynowrproducts(id)}}
                       style={{ margin:'10px' }}>Buy now</button>
                       <button
                         className="btn  bg-success text-white"
@@ -121,6 +156,7 @@ const sweetloading={
           })}
         </div>
       </div>
+      <ToastContainer/>
       {loading==false && (<Footer/>)}
       {addtocart && <Cart user={addtocart} func={addtocartEmpty} Buytocart={navigatebuytocart}/>}
       

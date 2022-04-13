@@ -1,20 +1,25 @@
 import axios from 'axios';
 import React, { useEffect, useState} from 'react';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import '../container/assets/productsdetauls.css';
 import { useDispatch,useSelector} from 'react-redux';
 import { singleproducts } from '../redux/Actions/productsActions';
 import 'font-awesome/css/font-awesome.min.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Cart from './AddtoCart/Cart';
 import Footer from './Footer/Footer';
 import Header from './Header';
  const ProductsDetails=()=> {
   const usedispatch=useDispatch();
+  const navigate=useNavigate();
   const sperate_products=useSelector(state=>state.ProductsDetails);
   let [navigatebuytocart,setMovebuytocart]=useState(false);
   const params=useParams();
   const [addtocart,setAddtocart]=useState('');
   const id=params.productsid;
+ 
   useEffect(()=>{
     Productsdata();
   },[]);
@@ -29,9 +34,28 @@ import Header from './Header';
      });}}
 
       const addTocart=(productsId)=>{
+        // const loginfo=JSON.parse(localStorage.getItem('userlogindetails'));
+        if ("userlogindetails" in localStorage)
+        {
         setAddtocart(productsId);
         setMovebuytocart(true);
-      }
+        return true;
+        }
+        else{
+          setTimeout(()=>{
+            navigate('/userlogin');
+          },2000)
+          toast.error(' please craete account or login', {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            });
+          }
+        }
       const addtocartEmpty=(cartEmptyvalue)=>{
         setAddtocart(cartEmptyvalue);
         setMovebuytocart(false);
@@ -64,6 +88,7 @@ import Header from './Header';
           </div> </>})}
           </div>
           </div><br/><br/><br/> 
+          <ToastContainer/>
           <Footer/>
           {addtocart&&<Cart user={addtocart} func={addtocartEmpty} Buytocart={navigatebuytocart}/>}
 </>}

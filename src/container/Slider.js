@@ -11,7 +11,7 @@ function Slider() {
     const carousel={
         position:'relative',
         width: '100%',
-        marginTop: matches?'-25px':'-0px',
+        marginTop: matches?'-25px':'0px',
         height:'320px',
        backgroundColor:'blue',
        textAlign:'center'
