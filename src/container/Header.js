@@ -1,8 +1,8 @@
 import React from 'react';
-import Navbar from './Navbar/Navbar';
+import NavbarMUI from './Navbar/NavbarMUI';
 function Header() {
   return <>
-         <Navbar/>
+         <NavbarMUI/>
           </>
 }
 

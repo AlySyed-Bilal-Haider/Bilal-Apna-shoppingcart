@@ -3,10 +3,12 @@ import {useSelector,useDispatch} from 'react-redux';
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 import Footer from './Footer/Footer';
 import Header from './Header';
+import { useNavigate } from "react-router-dom";
 import '../container/assets/shopcart.css'
 import { selectedRemoveProduct } from '../redux/Actions/productsActions';
 import CreditCard from './Creditcard/Card';
 function Shopcart() {
+    const navigate=useNavigate();
     var totalamount=0;
     var Addtocartitem=useSelector(state=>state);
     const usedispatch=useDispatch();
@@ -58,7 +60,9 @@ function Shopcart() {
         </div>
     </div>
 </div>):(<div className='cartempty pb-5' style={{position:'relative',margin:'auto',marginTop:'10%',lineHeight:'14px',textAlign:'center',fontSize:'12px' }}><span><strong>There are no items in this cart</strong></span><br/>
-        <button className='contineshopping btn mt-3 boder-1 btn-primary py-3'>Continue shopping</button></div>)}
+        <button className='contineshopping btn mt-3 boder-1 btn-primary py-3' onClick={()=>{
+            navigate('/');
+        }}>Continue shopping</button></div>)}
 <br/><br/><br/><br/>
 <Footer/>
   </>

@@ -1,0 +1,10 @@
+.navlink{
+    padding:10px;
+    font-size:14px;
+    text-decoration: none;
+    color:white;
+}
+.navlink:hover{
+    color:white;
+    text-decoration:none;
+}

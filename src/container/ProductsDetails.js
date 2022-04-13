@@ -11,6 +11,7 @@ import Header from './Header';
  const ProductsDetails=()=> {
   const usedispatch=useDispatch();
   const sperate_products=useSelector(state=>state.ProductsDetails);
+  let [navigatebuytocart,setMovebuytocart]=useState(false);
   const params=useParams();
   const [addtocart,setAddtocart]=useState('');
   const id=params.productsid;
@@ -29,9 +30,11 @@ import Header from './Header';
 
       const addTocart=(productsId)=>{
         setAddtocart(productsId);
+        setMovebuytocart(true);
       }
       const addtocartEmpty=(cartEmptyvalue)=>{
         setAddtocart(cartEmptyvalue);
+        setMovebuytocart(false);
       }
   return <>
   <div>
@@ -53,12 +56,15 @@ import Header from './Header';
               </div>
               <div className="product-price">
               <span>{item.price}</span>
-              <a href="#" className="cart-btn" onClick={()=>{addTocart(item.id)}}>Add to cart</a>
+              <button  className="cart-btn  btn  bg-success text-white" onClick={()=>{addTocart(item.id)}}>Add to cart</button>
+              <button className=" btn btn-primary cart-btn  text-white" 
+              style={{marginLeft:'10px'}}
+              onClick={()=>{addTocart(item.id)}}>Buy now</button>
             </div>
           </div> </>})}
           </div>
           </div><br/><br/><br/> 
           <Footer/>
-          {addtocart&&<Cart user={addtocart} func={addtocartEmpty}/>}
+          {addtocart&&<Cart user={addtocart} func={addtocartEmpty} Buytocart={navigatebuytocart}/>}
 </>}
 export default ProductsDetails;

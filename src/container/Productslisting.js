@@ -13,12 +13,11 @@ import HashLoader from "react-spinners/HashLoader";
 function Productslisting() {
   const Products = useSelector((state) => state.productReducer);
   let [loading, setLoading] = useState(true);
+  let [navigatebuytocart,setMovebuytocart]=useState(false);
   const usedispatch = useDispatch();
   const [addtocart, setAddtocart] = useState("");
   useEffect(() => {
-    // setLoading(true);
     Productsdata();
-    // setLoading(false);
   }, []);
   const Productsdata = async () => {
     await axios
@@ -36,6 +35,7 @@ function Productslisting() {
   };
   const addtocartEmpty = (cartEmptyvalue) => {
     setAddtocart(cartEmptyvalue);
+    setMovebuytocart(false);
   };
   const override = css`
   display: block;
@@ -47,7 +47,7 @@ function Productslisting() {
 `;
 const sweetloading={
   width:'100%',
-  height:'100%',
+  minHeight:'1220px',
   backgroundColor:'#4848488f',
   position: 'absolute',
   zIndex: 9999,
@@ -98,7 +98,12 @@ const sweetloading={
                       </h3>
                     </div>
                     <div className="add_to_cart">
-                      <button className="btn btn-primary" style={{ margin:'10px' }}>Buy now</button>
+                      <button className="btn btn-primary" 
+                       onClick={() => {
+                        addTocart(id);
+                        setMovebuytocart(true);
+                      }}
+                      style={{ margin:'10px' }}>Buy now</button>
                       <button
                         className="btn  bg-success text-white"
                         onClick={() => {
@@ -117,7 +122,7 @@ const sweetloading={
         </div>
       </div>
       {loading==false && (<Footer/>)}
-      {addtocart && <Cart user={addtocart} func={addtocartEmpty} />}
+      {addtocart && <Cart user={addtocart} func={addtocartEmpty} Buytocart={navigatebuytocart}/>}
       
     </>
   );

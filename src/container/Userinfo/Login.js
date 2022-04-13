@@ -12,19 +12,7 @@ function Login() {
    const [password,setpassword]=useState('');
    const [getuseremail,getEmail]=useState('');
    const [getpassword,getPassworduser]=useState('');
-      const nagivate = useNavigate();
-  // const onfirebaseSubmit = async () => {
-  //   signInWithEmailAndPassword(getAuth(fir), "afzalshah@gmail.com", 11111111)
-  //     .then((userCredential) => {
-  //       const user = userCredential.user;
-  //       setState(user);
-  //     })
-  //     .catch((error) => {
-  //       setState(error.message);
-  //     });
-  // };
-  // console.log("email"+getuseremail);
-  // console.log("password"+getpassword)
+     const nagivate = useNavigate();
     const loginHandler=(e)=>{
       e.preventDefault();
      const userinfo=JSON.parse(localStorage.getItem('user'));
@@ -32,9 +20,11 @@ function Login() {
      getPassworduser(userinfo.password);
      if(email==getuseremail && password==getpassword)
      {
-       setTimeout(()=>{
+      const logindetails={logemail:email,logpassword:password} 
+      localStorage.setItem('userlogindetails',JSON.stringify(logindetails));
+      setTimeout(()=>{
         nagivate('/');
-       },2000);
+      },2000)
       toast.success('login successfully', {
         position: "top-right",
         autoClose: 2500,
@@ -44,7 +34,6 @@ function Login() {
         draggable: true,
         progress: undefined,
         });
-      
      }else{
       toast.error('🦄 Invalid email or password, please try again', {
         position: "bottom-right",
@@ -56,8 +45,7 @@ function Login() {
         progress: undefined,
         });
        return false;
-     }
-    }
+     }}
   return (
     <>
       <div className="header">
@@ -65,7 +53,6 @@ function Login() {
       </div>
       <br />
       <br />
-  
         <div className="form_wrapper mt-5" style={{ height: "350px" }}>
           <div className="form_container">
             <div className="title_container">
@@ -127,7 +114,5 @@ function Login() {
       <br />
       <Footer />
     </>
-  );
-}
-
+  );}
 export default Login;

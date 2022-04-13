@@ -23,7 +23,7 @@ function Registerations() {
     setTimeout(()=>{
       nagivate('/userlogin');
     },2000);
-    toast.success('login successfully', {
+    toast.success('Registerations successfully', {
       position: "top-right",
       autoClose: 2500,
       hideProgressBar: false,
@@ -45,7 +45,6 @@ function Registerations() {
         const mydata={fname:values.fname,lname:values.lname,username:values.username,password:values.password,email:values.email} 
          localStorage.setItem('user',JSON.stringify(mydata));
           jumpone_pageto_another();
-
       }}
       >
         <div className="conatiner m-5">
