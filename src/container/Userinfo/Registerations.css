@@ -1,0 +1,22 @@
+.Signup{
+  position: relative;
+  background-color: rgb(252, 252, 252);
+  box-shadow: 5px 5px 5px rgb(235, 240, 243);
+  width: 50%;
+   height: auto;
+   padding: 5px;
+   border-radius: 5%;
+   margin: auto;
+}
+.input_field{
+   width:100%;
+    padding:10px;
+   margin-top: 10px;
+   border-radius: 5%;
+}
+.input_field .input{
+    width:60%;
+    height: 40px;
+    border:1px solid lightgrey;
+    outline: none;
+}
