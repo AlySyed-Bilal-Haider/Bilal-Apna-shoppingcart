@@ -81,7 +81,7 @@ function Shopcart() {
                 })}
             </div>
         </div>
-        <div className="col-md-4 sm-mt-5" style={{width:'100%'}}>
+        <div className="col-md-4 sm-mt-5">
             <div className="payment-info">
                 <div className="d-flex justify-content-between align-items-center"><span>Card details</span><img className="rounded" src="https://i.imgur.com/WU501C8.jpg" alt="" width="30"/></div>
                 <CreditCard/>
