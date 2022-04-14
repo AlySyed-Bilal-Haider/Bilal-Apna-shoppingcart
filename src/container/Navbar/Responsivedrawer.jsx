@@ -7,29 +7,45 @@ import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import DehazeIcon from '@mui/icons-material/Dehaze';
-import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
 import HomeIcon from '@mui/icons-material/Home';
-import GitHubIcon from '@mui/icons-material/GitHub';
-import WallpaperIcon from '@mui/icons-material/Wallpaper';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import VpnKeyIcon from '@mui/icons-material/VpnKey';
+import LogoutIcon from '@mui/icons-material/Logout';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import { NavLink } from "react-router-dom";
  const notifications = [
   {
     
     avatarIcon: (<HomeIcon/>),
     text: "Home",
+    path:'/'
   },
   {
-   avatarIcon: (<GitHubIcon/>),
+   avatarIcon: (<PersonAddIcon/>),
    text: "Registerations",
+   path:'/usersignup'
+
   }, 
   {
-    avatarIcon: (<WallpaperIcon/>),
+    avatarIcon: (<VpnKeyIcon/>),
     text: "login",
+    path:'/userlogin'
    },   
    {
-    avatarIcon: (<ContactPhoneIcon/>),
+    avatarIcon: (<AddShoppingCartIcon/>),
     text: "cart",
-   }, 
+    path:'/shoppingcart'
+   },
+   {
+    avatarIcon: (<LogoutIcon/>),
+    text: "logout",
+    path:'/logout'
+   },  
 ];
+const navlinkstyling={
+  textDecoration:'none',
+  color:'white'
+}
 export default function TemporaryDrawer() {
     const [state, setState] = React.useState({
       top: false,
@@ -58,7 +74,9 @@ export default function TemporaryDrawer() {
             <ListItemIcon style={{color:'white'}}>
             {item.avatarIcon}
             </ListItemIcon>
-            <ListItemText style={{color:'white'}} primary={item.text} />
+            <ListItemText >
+              <NavLink style={navlinkstyling} to={item.path}>{item.text}</NavLink> 
+            </ListItemText>
           </ListItem>
         ))}
       </List>

@@ -15,13 +15,13 @@ function Login() {
      const nagivate = useNavigate();
     const loginHandler=(e)=>{
       e.preventDefault();
-     const userinfo=JSON.parse(localStorage.getItem('user'));
+     const userinfo=JSON.parse(localStorage.getItem("user"));
      getEmail(userinfo.email);
      getPassworduser(userinfo.password);
      if(email==getuseremail && password==getpassword)
      {
       const logindetails={logemail:email,logpassword:password} 
-      localStorage.setItem('userlogindetails',JSON.stringify(logindetails));
+      localStorage.setItem("userlogindetails",JSON.stringify(logindetails));
       setTimeout(()=>{
         nagivate('/');
       },2000)

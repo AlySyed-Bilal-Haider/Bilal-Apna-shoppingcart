@@ -41,10 +41,11 @@ function Productslisting() {
       });
   };
   // add to cart method
-  const addTocart = (productsId) => {
+  const Buynowrproducts = (productsId) => {
     if ("userlogindetails" in localStorage)
     {
     setAddtocart(productsId);
+    setMovebuytocart(true);
     return true;
     }
     else
@@ -70,9 +71,8 @@ function Productslisting() {
     setMovebuytocart(false);
   };
   //buy now products methods
-  const Buynowrproducts=(id)=>{
-    addTocart(id);
-    setMovebuytocart(true);
+  const addTocart=(id)=>{
+    setAddtocart(id);
   }
   const override = css`
   display: block;

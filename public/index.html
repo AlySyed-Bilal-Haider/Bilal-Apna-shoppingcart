@@ -11,7 +11,6 @@
     />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/material-ui/5.0.0-beta.5/index.js" integrity="sha512-uKxirna7d5STmVXEMQYBVRW1nERrqHjwOubv4QcK4oYaaifLiEnN/aLIJxVsyK4R1K+awpNIG73RaQfT1DZ8ew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <title>Shopping Cart</title>
     <style>
       body{
@@ -19,10 +18,20 @@
         padding:0px;
         overflow-x: hidden;
       }
+      ::-webkit-scrollbar {
+    width: 15px;
+  }
+  ::-webkit-scrollbar-track {
+    background:linear-gradient(blue,rgb(3, 173, 3));
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgb(83, 16, 240); 
+  }
     </style>
   </head>
   <body>
     <div id="root"></div>
-    <script type=”text/javascript” crossorigin=”anonymous” src=”https://securegw-stage.paytm.in/merchantpgpui/checkoutjs/merchants/.js” >< /script >
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/material-ui/5.0.0-beta.5/index.js"  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type=”text/javascript” crossorigin=”anonymous” src=”https://securegw-stage.paytm.in/merchantpgpui/checkoutjs/merchants/.js” ></script>
   </body>
 </html>

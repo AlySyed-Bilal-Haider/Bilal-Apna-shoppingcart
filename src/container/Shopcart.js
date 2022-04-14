@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import '../container/assets/shopcart.css'
 import { selectedRemoveProduct } from '../redux/Actions/productsActions';
 import CreditCard from './Creditcard/Card';
+import 'font-awesome/css/font-awesome.min.css';
+import { ToastContainer, toast } from 'react-toastify';
 function Shopcart() {
     const navigate=useNavigate();
     var totalamount=0;
@@ -15,6 +17,37 @@ function Shopcart() {
     const removeproductsHandler=(id)=>{
       usedispatch(selectedRemoveProduct(id));
     }
+    const checkoutProducts= () => {
+        if ("userlogindetails" in localStorage)
+        {
+            toast.success('Checkout successfully', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
+        return true;
+        }
+        else
+        {
+          setTimeout(()=>{
+            navigate('/userlogin');
+          },2000);
+          toast.error(' please craete account or login', {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            });
+          
+        }
+      };
      return <>
                    <Header/><br/>
                    {Addtocartitem.AddtoCartProductsreducer.length!==0?(<div className="container mt-3 p-3 rounded cart">
@@ -48,13 +81,13 @@ function Shopcart() {
                 })}
             </div>
         </div>
-        <div className="col-md-4">
+        <div className="col-md-4 sm-mt-5" style={{width:'100%'}}>
             <div className="payment-info">
                 <div className="d-flex justify-content-between align-items-center"><span>Card details</span><img className="rounded" src="https://i.imgur.com/WU501C8.jpg" alt="" width="30"/></div>
                 <CreditCard/>
                 <hr className="line"/>
                 <div className="d-flex justify-content-between information"><span>Total amount:</span><span readOnly>{totalamount}</span></div>
-                <button className="btn btn-primary btn-block d-flex justify-content-between mt-3" type="button">
+                <button className="btn btn-primary btn-block d-flex justify-content-between mt-3" type="button" onClick={checkoutProducts}>
                   <span readOnly>{totalamount}</span><span>Checkout<i class="fa fa-long-arrow-right ml-1"></i></span></button>
             </div>
         </div>
@@ -63,6 +96,7 @@ function Shopcart() {
         <button className='contineshopping btn mt-3 boder-1 btn-primary py-3' onClick={()=>{
             navigate('/');
         }}>Continue shopping</button></div>)}
+        <ToastContainer/>
 <br/><br/><br/><br/>
 <Footer/>
   </>

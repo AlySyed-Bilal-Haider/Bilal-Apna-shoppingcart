@@ -43,17 +43,18 @@ function Registerations() {
         validationSchema={LoginSchema}
         onSubmit={(values) => {
         const mydata={fname:values.fname,lname:values.lname,username:values.username,password:values.password,email:values.email} 
-         localStorage.setItem('user',JSON.stringify(mydata));
+         localStorage.setItem("user",JSON.stringify(mydata));
           jumpone_pageto_another();
       }}
+      className="Signup"
       >
         <div className="conatiner m-5">
           <div className="row">
-            <div className="col justify-content-center py-2 Signup">
-              <h3 style={{ textAlign: "center", padding: "5px" }}>
+            <div className="col justify-content-center py-2 ">
+              <Form>
+              <h3 style={{ textAlign: "left", padding: "5px",marginLeft:'18%' }}>
                 Signup Form
               </h3>
-              <Form>
                 <div className="input_field">
                   <Field
                     className="input"
@@ -132,7 +133,7 @@ function Registerations() {
                 <button
                   type="submit"
                   className="btn btn-primary py-2"
-                  style={{ marginRight: "720px" }}
+                  style={{ marginRight: "60%" }}
                 >
                   Register
                 </button>

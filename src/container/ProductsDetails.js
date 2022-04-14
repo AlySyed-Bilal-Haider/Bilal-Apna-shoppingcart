@@ -33,7 +33,7 @@ import Header from './Header';
          console.log("error",error)
      });}}
 
-      const addTocart=(productsId)=>{
+      const BuyTocart=(productsId)=>{
         // const loginfo=JSON.parse(localStorage.getItem('userlogindetails'));
         if ("userlogindetails" in localStorage)
         {
@@ -55,6 +55,11 @@ import Header from './Header';
             progress: undefined,
             });
           }
+        }
+        const addTocart=(productsId)=>{
+          setAddtocart(productsId);
+          setMovebuytocart(true);
+          return true;
         }
       const addtocartEmpty=(cartEmptyvalue)=>{
         setAddtocart(cartEmptyvalue);
@@ -83,7 +88,7 @@ import Header from './Header';
               <button  className="cart-btn  btn  bg-success text-white" onClick={()=>{addTocart(item.id)}}>Add to cart</button>
               <button className=" btn btn-primary cart-btn  text-white" 
               style={{marginLeft:'10px'}}
-              onClick={()=>{addTocart(item.id)}}>Buy now</button>
+              onClick={()=>{BuyTocart(item.id)}}>Buy now</button>
             </div>
           </div> </>})}
           </div>
